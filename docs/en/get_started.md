@@ -17,12 +17,15 @@
 
 2. Install OneDL-MMTracking:
    a. From PyPI
+
    ```shell
    uv pip install onedl-mmtracking
    # if you want all optional dependencies, use:
    # mim install onedl-mmtracking[optional]
    ```
+
    b. From source
+
    ```shell
    git clone https://github.com/vbti-development/onedl-mmtracking.git
    cd onedl-mmtracking

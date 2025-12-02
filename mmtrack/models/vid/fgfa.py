@@ -18,8 +18,8 @@ from .base import BaseVideoDetector
 class FGFA(BaseVideoDetector):
     """Flow-Guided Feature Aggregation for Video Object Detection.
 
-    This video object detector is the implementation of `FGFA
-    <https://arxiv.org/abs/1703.10025>`_.
+    This video object detector is the implementation of
+    `FGFA <https://arxiv.org/abs/1703.10025>`_.
     """
 
     def __init__(self,

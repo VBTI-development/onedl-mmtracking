@@ -159,5 +159,7 @@ class CocoVID(COCO):
         """
         if _isArrayLike(ids):
             return [self.videos[id] for id in ids]
-        elif type(ids) == int:
+        elif isinstance(ids, int):
             return [self.videos[ids]]
+        else:
+            raise TypeError('ids must be an int or list of ints')

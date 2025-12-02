@@ -13,7 +13,7 @@ class FilterInitializer(BaseModule):
 
     Args:
         filter_size (int, optional):  Size of the filter. Defaults to 4.
-        feature_dim (int, optional):  Input feature dimentionality.
+        feature_dim (int, optional):  Input feature dimensionality.
              Defaults to 512.
         feature_stride (int, optional):  Input feature stride. Defaults to 16.
     """

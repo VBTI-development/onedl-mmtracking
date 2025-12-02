@@ -10,7 +10,7 @@ def flow_warp_feats(x: torch.Tensor, flow: torch.Tensor) -> torch.Tensor:
         flow (Tensor): of shape (N, C, H_f, W_f).
 
     Returns:
-        Tensor: The warpped feature map with shape (N, C, H_x, W_x).
+        Tensor: The warped feature map with shape (N, C, H_x, W_x).
     """
     assert x.dim() == 4
     assert flow.dim() == 4 and flow.size(1) == 2

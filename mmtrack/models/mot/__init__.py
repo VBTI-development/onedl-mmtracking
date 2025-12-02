@@ -9,5 +9,5 @@ from .tracktor import Tracktor
 
 __all__ = [
     'BaseMultiObjectTracker', 'ByteTrack', 'DeepSORT', 'Tracktor', 'QDTrack',
-    'StrongSORT'
+    'StrongSORT', 'OCSORT'
 ]

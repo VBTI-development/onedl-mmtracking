@@ -100,7 +100,7 @@ We also support more methods in MMTracking 1.x, such as StrongSORT for MOT, Mask
 #### Improvements
 
 - Refactor LaSOT, TrackingNet dataset and support GOT-10K datasets ([#296](https://github.com/open-mmlab/mmtracking/pull/296))
-- Support persisitent workers ([#348](https://github.com/open-mmlab/mmtracking/pull/348))
+- Support persistent workers ([#348](https://github.com/open-mmlab/mmtracking/pull/348))
 
 ### v0.8.0 (03/10/2021)
 

@@ -54,7 +54,7 @@ class TemporalRoIAlign(SingleRoIExtractor):
         1. Pass through a tiny embed network.
         2. Use multi-head attention to computing the weight between `x` and
         `ref_x`.
-        3. Use the normlized (i.e. softmax) weight to weightedly sum `x` and
+        3. Use the normalized (i.e. softmax) weight to weightedly sum `x` and
         `ref_x`.
 
         Args:

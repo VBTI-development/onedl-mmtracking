@@ -31,18 +31,18 @@ def parse_args():
     parser.add_argument(
         '--penalty-k-range',
         type=parse_range,
-        help="the range of hyper-parameter 'penalty_k' in SiamRPN++; the format \
-            is 'start,stop,step'")
+        help="the range of hyper-parameter 'penalty_k' in SiamRPN++; "
+        "the format is 'start,stop,step'")
     parser.add_argument(
         '--lr-range',
         type=parse_range,
-        help="the range of hyper-parameter 'lr' in SiamRPN++; the format is \
-            'start,stop,step'")
+        help="the range of hyper-parameter 'lr' in SiamRPN++; "
+        "the format is 'start,stop,step'")
     parser.add_argument(
         '--win-influ-range',
         type=parse_range,
-        help="the range of hyper-parameter 'window_influence' in SiamRPN++; the \
-            format is 'start,stop,step'")
+        help="the range of hyper-parameter 'window_influence' in SiamRPN++; "
+        "the format is 'start,stop,step'")
     parser.add_argument(
         '--cfg-options',
         nargs='+',

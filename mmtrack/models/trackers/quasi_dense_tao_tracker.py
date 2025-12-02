@@ -256,8 +256,8 @@ class QuasiDenseTAOTracker(BaseTracker):
                 conf, memo_ind = torch.max(match_scores[i, :], dim=0)
                 obj_score_diff = obj_score_diffs[i, memo_ind]
                 # update track and object score for matched detection
-                if (conf > self.match_score_thr) and (obj_score_diff <
-                                                      self.obj_score_diff_thr):
+                if (conf > self.match_score_thr) and (
+                        obj_score_diff < self.obj_score_diff_thr):
                     ids[i] = memo_ids[memo_ind]
                     match_scores[:i, memo_ind] = 0
                     match_scores[i + 1:, memo_ind] = 0

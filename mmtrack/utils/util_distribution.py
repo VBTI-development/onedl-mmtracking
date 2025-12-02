@@ -8,7 +8,7 @@ ddp_factory = {'cuda': MMDistributedDataParallel}
 
 
 def build_dp(model, device='cuda', dim=0, *args, **kwargs):
-    """build DataParallel module by device type.
+    """Build DataParallel module by device type.
 
     if device is cuda, return a MMDataParallel model; if device is npu,
     return a NPUDataParallel model.
@@ -33,6 +33,7 @@ def build_dp(model, device='cuda', dim=0, *args, **kwargs):
 
 def build_ddp(model, device='cuda', *args, **kwargs):
     """Build DistributedDataParallel module by device type.
+
     If device is cuda, return a MMDistributedDataParallel model;
     if device is npu, return a NPUDistributedDataParallel model.
     Args:

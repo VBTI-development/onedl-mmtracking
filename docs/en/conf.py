@@ -104,7 +104,8 @@ html_theme_options = {
                 },
                 {
                     'name': 'MMDetection',
-                    'url': 'https://github.com/vbti-development/onedl-mmdetection',
+                    'url':
+                    'https://github.com/vbti-development/onedl-mmdetection',
                 },
             ]
         },

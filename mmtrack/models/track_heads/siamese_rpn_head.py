@@ -28,7 +28,7 @@ class CorrelationHead(BaseModule):
         mid_channels (int): Middle channels.
         out_channels (int): Output channels.
         kernel_size (int): Kernel size of convs. Defaults to 3.
-        norm_cfg (dict): Configuration of normlization method after each conv.
+        norm_cfg (dict): Configuration of normalization method after each conv.
             Defaults to dict(type='BN').
         act_cfg (dict): Configuration of activation method after each conv.
             Defaults to dict(type='ReLU').
@@ -106,7 +106,7 @@ class SiameseRPNHead(BaseModule):
 
         kernel_size (int): Kernel size of convs. Defaults to 3.
 
-        norm_cfg (dict): Configuration of normlization method after each conv.
+        norm_cfg (dict): Configuration of normalization method after each conv.
             Defaults to dict(type='BN').
 
         weighted_sum (bool): If True, use learnable weights to weightedly sum

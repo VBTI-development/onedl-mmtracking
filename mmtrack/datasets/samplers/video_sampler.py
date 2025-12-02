@@ -2,7 +2,7 @@
 from typing import Iterator, Sized
 
 import numpy as np
-from mmengine.dist import get_dist_info
+from torch.utils.data import DistributedSampler as _DistributedSampler
 from torch.utils.data import Sampler
 
 from mmtrack.datasets import BaseSOTDataset, BaseVideoDataset
@@ -28,7 +28,7 @@ class VideoSampler(Sampler):
 
     def __iter__(self):
         return iter(self.indices)
-    
+
     def __len__(self):
         return len(self.dataset)
 

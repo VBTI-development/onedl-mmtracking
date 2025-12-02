@@ -43,8 +43,8 @@ class TestBasevideoDataset(TestCase):
             video_idx, frame_idx = idx
             assert (video_idx >= 0
                     and video_idx < self.sot_video_dataset.num_videos)
-            assert (frame_idx >= 0 and frame_idx <
-                    self.sot_video_dataset.get_len_per_video(video_idx))
+            assert (frame_idx >= 0 and frame_idx
+                    < self.sot_video_dataset.get_len_per_video(video_idx))
 
     def test_len(self):
         assert len(self.video_sampler) == len(self.video_dataset)

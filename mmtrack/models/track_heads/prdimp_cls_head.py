@@ -253,9 +253,9 @@ class PrDiMPClsHead(BaseModule):
 
         self.memo.sample_weights /= self.memo.sample_weights.sum()
         if (init_sample_weight is not None
-                and self.memo.sample_weights[:self.num_init_samples].sum() <
-                init_sample_weight):
-            # TODO werid! the sum of samples_weights is not equal to 1.
+                and self.memo.sample_weights[:self.num_init_samples].sum()
+                < init_sample_weight):
+            # TODO weird! the sum of samples_weights is not equal to 1.
             self.memo.sample_weights /= (
                 init_sample_weight +
                 self.memo.sample_weights[self.num_init_samples:].sum())
@@ -430,7 +430,7 @@ class PrDiMPClsHead(BaseModule):
         second_max_pos = second_max_pos.flip(0).float().view(-1)
         distractor_disp_score_map = second_max_pos - score_center
         distractor_disp = distractor_disp_score_map * ratio_size
-        # The displacement of previout target bbox to the center of the score
+        # The displacement of previous target bbox to the center of the score
         # map.
         # Note that `sample_center`` may not be equal to the center of previous
         # tracking bbox due to different cropping mode

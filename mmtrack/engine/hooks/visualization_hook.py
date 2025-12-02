@@ -85,7 +85,7 @@ class TrackVisualizationHook(Hook):
         if self.draw is False:
             return
 
-        assert len(outputs) == 1,\
+        assert len(outputs) == 1, \
             'only batch_size=1 is supported while validating.'
 
         total_curr_iter = runner.iter + batch_idx

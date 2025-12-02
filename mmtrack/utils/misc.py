@@ -76,7 +76,7 @@ def convert_data_sample_type(
 
     Args:
         data_sample (TrackDataSample): Data sample input.
-        num_ref_imgs (int, optional): The numbe of reference images in the
+        num_ref_imgs (int, optional): The number of reference images in the
             ``data_sample``. Defaults to 1.
 
     Returns:

@@ -58,10 +58,12 @@ class TestBasevideoDataset(TestCase):
             results = self.dataset_video[i]
             assert isinstance(results, dict)
             assert len(results['frame_id']) == 3
-            assert abs(results['frame_id'][1] - results['frame_id'][0]
-                       ) <= self.ref_img_sampler['frame_range']
-            assert abs(results['frame_id'][2] - results['frame_id'][0]
-                       ) <= self.ref_img_sampler['frame_range']
+            assert abs(
+                results['frame_id'][1] -
+                results['frame_id'][0]) <= self.ref_img_sampler['frame_range']
+            assert abs(
+                results['frame_id'][2] -
+                results['frame_id'][0]) <= self.ref_img_sampler['frame_range']
 
         # test load_as_video=False
         for i in range(1, len(self.dataset_image) - 1):

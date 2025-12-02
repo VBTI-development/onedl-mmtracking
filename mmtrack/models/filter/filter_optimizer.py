@@ -32,7 +32,7 @@ class PrDiMPFilterOptimizer(BaseModule):
         min_filter_regular (float, optional):  Enforce a minimum value on the
             regularization (helps stability sometimes). Defaults to 1e-3.
         alpha_eps (float, optional):  Term in the denominator of the steepest
-            descent that stabalizes learning. Defaults to 0.
+            descent that stabilizes learning. Defaults to 0.
         label_thres (float, optional):  Threshold probabilities. Defaults to 0.
     """
 
@@ -127,7 +127,7 @@ class PrDiMPFilterOptimizer(BaseModule):
                 sample with shape (num_img_per_seq, [bs]). Defaults to None.
 
         Returns:
-            filter_weights (Tensor):  The final oprimized filter.
+            filter_weights (Tensor):  The final optimized filter.
             filter_iters (Tensor, optional):  The filter computed in each
                 iteration (including initial input and final output), returned
                 only in training

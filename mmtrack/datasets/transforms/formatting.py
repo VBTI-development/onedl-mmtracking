@@ -435,7 +435,7 @@ class PackReIDInputs(BaseTransform):
         if _type == list:
             img = results['img']
             label = np.stack(label, axis=0)  # (N,)
-            assert all([type(v) == _type for v in results.values()]), \
+            assert all([isinstance(v, _type) for v in results.values()]), \
                 'All items in the results must have the same type.'
         else:
             img = [results['img']]

@@ -164,7 +164,7 @@ class SOTMetric(BaseVideoMetric):
         """
         logger: MMLogger = MMLogger.get_current_instance()
 
-        # 1. Convert the format of reuslts for evaluation.
+        # 1. Convert the format of results for evaluation.
         all_pred_bboxes, all_gt_bboxes = [], []
         all_video_names, all_video_sizes, all_visible = [], [], []
         for result in results:

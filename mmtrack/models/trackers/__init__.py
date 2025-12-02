@@ -10,7 +10,13 @@ from .strongsort_tracker import StrongSORTTracker
 from .tracktor_tracker import TracktorTracker
 
 __all__ = [
-    'BaseTracker', 'TracktorTracker', 'SortTracker', 'MaskTrackRCNNTracker',
-    'ByteTracker', 'QuasiDenseTracker', 'QuasiDenseTAOTracker', 'OCSORTTracker'
-    'StrongSORTTracker'
+    'BaseTracker',
+    'TracktorTracker',
+    'SORTTracker',
+    'MaskTrackRCNNTracker',
+    'ByteTracker',
+    'QuasiDenseTracker',
+    'QuasiDenseTAOTracker',
+    'OCSORTTracker',
+    'StrongSORTTracker',
 ]

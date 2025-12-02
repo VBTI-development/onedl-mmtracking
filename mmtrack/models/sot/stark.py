@@ -199,7 +199,7 @@ class Stark(BaseSingleObjectTracker):
 
     def update_template(self, img: Tensor, bbox: Union[List, Tensor],
                         conf_score: float):
-        """Update the dymanic templates.
+        """Update the dynamic templates.
 
         Args:
             img (Tensor): of shape (1, C, H, W).

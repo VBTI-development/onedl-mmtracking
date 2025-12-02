@@ -4,7 +4,7 @@ Compared with the 0.xx versions of MMTracking, the latest 1.xx version of MMTrac
 
 ## Overall Structures
 
-The `core` in the old versions of MMTracking is splited into `engine`, `evaluation`, `structures`, `visualization` and `model/task_moduls` in the 1.xx version of MMTracking. Details can be seen in the [user guides](../../docs/en/user_guides).
+The `core` in the old versions of MMTracking is split into `engine`, `evaluation`, `structures`, `visualization` and `model/task_moduls` in the 1.xx version of MMTracking. Details can be seen in the [user guides](../../docs/en/user_guides).
 
 ## Configs
 

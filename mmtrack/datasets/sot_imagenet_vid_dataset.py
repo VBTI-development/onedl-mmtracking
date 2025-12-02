@@ -40,7 +40,7 @@ class SOTImageNetVIDDataset(BaseSOTDataset):
     def get_bboxes_from_video(self, video_idx: int) -> np.ndarray:
         """Get bbox annotation about one instance in a video. Considering
         `get_bboxes_from_video` in `SOTBaseDataset` is not compatible with
-        `SOTImageNetVIDDataset`, we oveload this function though it's not
+        `SOTImageNetVIDDataset`, we overload this function though it's not
         called by `self.get_ann_infos_from_video`.
 
         Args:
@@ -129,7 +129,7 @@ class SOTImageNetVIDDataset(BaseSOTDataset):
     def get_visibility_from_video(self, video_idx: int) -> dict:
         """Get the visible information about one instance in a video.
         Considering `get_visibility_from_video` in `SOTBaseDataset` is not
-        compatible with `SOTImageNetVIDDataset`, we oveload this function
+        compatible with `SOTImageNetVIDDataset`, we overload this function
         though it's not called by `self.get_ann_infos_from_video`.
 
         Args:

@@ -26,7 +26,7 @@ except ImportError:
 
 @METRICS.register_module()
 class TAOMetric(BaseVideoMetric):
-    """mAP evaluation metrics for the TAO task.
+    """MAP evaluation metrics for the TAO task.
 
     Args:
         metric (str | list[str]): Metrics to be evaluated.

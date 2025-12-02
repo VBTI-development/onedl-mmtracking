@@ -336,7 +336,7 @@ class IouNetHead(BaseModule):
 
         Args:
             init_bbox (Tensor): of shape (4, ) or (1, 4) in [cx, cy, w, h]
-                formmat.
+                format.
             backbone_feats (tuple(Tensor)): of shape (1, c, h, w)
             sample_center (Tensor): The center of the cropped
                 sample on the original image. It's in [x, y] format.

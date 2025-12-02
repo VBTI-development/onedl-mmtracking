@@ -11,7 +11,7 @@ from mmtrack.registry import MODELS
 
 @MODELS.register_module()
 class MultiPosCrossEntropyLoss(BaseModule):
-    """multi-positive targets cross entropy loss."""
+    """Multi-positive targets cross entropy loss."""
 
     def __init__(self, reduction: str = 'mean', loss_weight: float = 1.0):
         super(MultiPosCrossEntropyLoss, self).__init__()

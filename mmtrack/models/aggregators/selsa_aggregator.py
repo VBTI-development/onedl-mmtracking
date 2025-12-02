@@ -41,7 +41,7 @@ class SelsaAggregator(BaseModule):
         The aggregation mainly contains two steps:
         1. Use multi-head attention to computing the weight between `x` and
         `ref_x`.
-        2. Use the normlized (i.e. softmax) weight to weightedly sum `ref_x`.
+        2. Use the normalized (i.e. softmax) weight to weightedly sum `ref_x`.
 
         Args:
             x (Tensor): of shape [N, C]. N is the number of key frame

@@ -121,7 +121,8 @@ class MixFormerHead(BaseModule):
     confidence of tracking bbox.
 
     This module is proposed in "MixFormer: End-to-End Tracking with Iterative
-    Mixed Attention". `MixFormer <https://arxiv.org/abs/2203.11082>`_.
+    Mixed Attention".
+    `MixFormer <https://arxiv.org/abs/2203.11082>`_.
     """
 
     def __init__(self,
@@ -182,7 +183,7 @@ class MixFormerHead(BaseModule):
         return track_results
 
     def loss(self, track_results, gt_bboxes, gt_labels, img_size=None):
-        """compute loss. Not Implemented yet!
+        """Compute loss. Not Implemented yet!
 
         Args:
             track_results (dict): it may contains the following keys:

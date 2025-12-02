@@ -176,9 +176,8 @@ class TrackDataPreprocessor(BaseDataPreprocessor):
                 pad_w = int(
                     np.ceil(imgs.shape[-1] /
                             self.pad_size_divisor)) * self.pad_size_divisor
-                pad_shapes = [
-                    (pad_h, pad_w)
-                ] * imgs.size(0) if imgs.size(0) > 1 else (pad_h, pad_w)
+                pad_shapes = [(pad_h, pad_w)] * imgs.size(0) if imgs.size(
+                    0) > 1 else (pad_h, pad_w)
                 pad_shape_list.append(pad_shapes)
             batch_pad_shape[imgs_key] = pad_shape_list
         return batch_pad_shape

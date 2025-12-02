@@ -20,7 +20,7 @@ class EmbedAggregator(BaseModule):
         num_convs (int): Number of embedding convs.
         channels (int): Channels of embedding convs. Defaults to 256.
         kernel_size (int): Kernel size of embedding convs, Defaults to 3.
-        norm_cfg (dict): Configuration of normlization method after each
+        norm_cfg (dict): Configuration of normalization method after each
             conv. Defaults to None.
         act_cfg (dict): Configuration of activation method after each
             conv. Defaults to dict(type='ReLU').
@@ -59,7 +59,7 @@ class EmbedAggregator(BaseModule):
 
         The aggregation mainly contains two steps:
         1. Computing the cos similarity between `x` and `ref_x`.
-        2. Use the normlized (i.e. softmax) cos similarity to weightedly sum
+        2. Use the normalized (i.e. softmax) cos similarity to weightedly sum
         `ref_x`.
 
         Args:

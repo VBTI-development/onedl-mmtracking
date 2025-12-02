@@ -208,10 +208,10 @@ class StarkTransformer(Transformer):
                 pos_embed: Tensor) -> Tuple[Tensor, Tensor]:
         """Forward function for `StarkTransformer`.
 
-        The difference with transofrmer module in `MMCV` is the input shape.
+        The difference with transformer module in `MMCV` is the input shape.
         The sizes of template feature maps and search feature maps are
         different. Thus, we must flatten and concatenate them outside this
-        module. The `MMCV` flatten the input features inside tranformer module.
+        module. The `MMCV` flatten the input features inside transformer module.
 
         Args:
             x (Tensor): Input query with shape (feats_flatten_len, bs, c)

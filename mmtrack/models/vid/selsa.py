@@ -17,8 +17,8 @@ from .base import BaseVideoDetector
 class SELSA(BaseVideoDetector):
     """Sequence Level Semantics Aggregation for Video Object Detection.
 
-    This video object detector is the implementation of `SELSA
-    <https://arxiv.org/abs/1907.06390>`_.
+    This video object detector is the implementation of
+    `SELSA <https://arxiv.org/abs/1907.06390>`_.
     """
 
     def __init__(self,

@@ -9,14 +9,14 @@ from mmtrack.registry import HOOKS
 class YOLOXModeSwitchHook(_YOLOXModeSwitchHook):
     """Switch the mode of YOLOX during training.
 
-    This hook turns off the mosaic and mixup data augmentation and switches
-    to use L1 loss in bbox_head.
+    This hook turns off the mosaic and mixup data augmentation and switches to
+    use L1 loss in bbox_head.
 
-    The difference between this class and the class in mmdet is that the
-    class in mmdet use `model.bbox_head.use_l1=True` to switch mode, while
-    this class will check whether there is a detector module in the model
-    firstly, then use `model.detector.bbox_head.use_l1=True` or
-    `model.bbox_head.use_l1=True` to switch mode.
+    The difference between this class and the class in mmdet is that the class
+    in mmdet use `model.bbox_head.use_l1=True` to switch mode, while this class
+    will check whether there is a detector module in the model firstly, then
+    use `model.detector.bbox_head.use_l1=True` or `model.bbox_head.use_l1=True`
+    to switch mode.
     """
 
     def before_train_epoch(self, runner):

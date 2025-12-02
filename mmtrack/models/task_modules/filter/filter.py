@@ -85,7 +85,7 @@ def apply_feat_transpose(feat: Tensor,
                                        *filter_grad.shape[-2:])
         return filter_grad.sum(dim=1).permute(1, 0, 2, 3)
     else:
-        # fast forwward and slow backward
+        # fast forward and slow backward
         transpose_pad = [(sz - 1) // 2 for sz in filter_size_hw]
         batch_size = feat.shape[0]
         filter_grad = F.conv2d(

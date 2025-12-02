@@ -170,7 +170,7 @@ test_evaluator=dict(
 
 Here, `eval_show_video_indices` is used to index a `numpy.ndarray`.
 It can be `int` (positive or negative) or `list`. The positive number `k` means all the top-k
-reuslts while the negative number means the bottom-k results.
+results while the negative number means the bottom-k results.
 
 ## Save SOT evaluation results and plot them
 

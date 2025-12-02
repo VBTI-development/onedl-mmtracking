@@ -11,7 +11,7 @@ from mmtrack.utils import ConfigType, InstanceList, SampleList
 
 @MODELS.register_module()
 class SelsaRoIHead(StandardRoIHead):
-    """selsa roi head."""
+    """Selsa roi head."""
 
     def loss(self, x: Tuple[Tensor], ref_x: Tuple[Tensor],
              rpn_results_list: InstanceList,

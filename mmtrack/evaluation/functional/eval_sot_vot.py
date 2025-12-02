@@ -60,7 +60,7 @@ def trajectory2region(trajectory: List[np.ndarray]) -> List:
 
 
 def locate_failures_inits(trajectory: List[np.ndarray]) -> Tuple[List, List]:
-    """locate the failure frame and initialized frame in a trajectory.
+    """Locate the failure frame and initialized frame in a trajectory.
 
     Args:
         trajectory (List[np.ndarray]): list of tracking results.
@@ -82,7 +82,7 @@ def locate_failures_inits(trajectory: List[np.ndarray]) -> Tuple[List, List]:
 
 
 def count_failures(trajectory: List[np.ndarray]) -> List:
-    """count the number of failed frame in a trajectory.
+    """Count the number of failed frame in a trajectory.
 
     Args:
         trajectory (List[np.ndarray]): list of tracking results.
@@ -246,7 +246,7 @@ def eval_sot_eao(
         annotations: List[np.ndarray],
         interval: Tuple[int, int] = [100, 356],
         videos_wh: Optional[Tuple[int, int]] = None) -> Dict[str, float]:
-    """Calculate EAO socre over all tracking sequences.
+    """Calculate EAO score over all tracking sequences.
 
     Args:
         results (List[List[np.ndarray]]): The first list contains the

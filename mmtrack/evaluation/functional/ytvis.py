@@ -47,7 +47,7 @@ class YTVIS:
         visualizing annotations.
 
         :param annotation_file (str | dict): location of annotation file or
-            dict results.
+        dict results.
         :param image_folder (str): location to the folder that hosts images.
         :return:
         """
@@ -58,14 +58,14 @@ class YTVIS:
         if annotation_file is not None:
             print('loading annotations into memory...')
             tic = time.time()
-            if type(annotation_file) == str:
+            if isinstance(annotation_file, str):
                 dataset = json.load(open(annotation_file, 'r'))
             else:
                 dataset = annotation_file
-            assert type(
-                dataset
-            ) == dict, 'annotation file format {} not supported'.format(
-                type(dataset))
+            assert isinstance(
+                dataset,
+                dict), 'annotation file format {} not supported'.format(
+                    type(dataset))
             print('Done (t={:0.2f}s)'.format(time.time() - tic))
             self.dataset = dataset
             self.createIndex()
@@ -105,10 +105,9 @@ class YTVIS:
         """Get ann ids that satisfy given filter conditions. default skips that
         filter.
 
-        :param vidIds  (int array)     : get anns for given vids
-               catIds  (int array)     : get anns for given cats
-               areaRng (float array)   : get anns for given area range
-               iscrowd (boolean)       : get anns for given crowd label
+        :param vidIds (int array) : get anns for given vids catIds (int array)
+            : get anns for given cats areaRng (float array) : get anns for
+            given area range iscrowd (boolean) : get anns for given crowd label
         :return: ids (int array)       : integer array of ann ids
         """
         vidIds = vidIds if _isArrayLike(vidIds) else [vidIds]
@@ -139,7 +138,7 @@ class YTVIS:
         return ids
 
     def getCatIds(self, catNms=[], supNms=[], catIds=[]):
-        """filtering parameters. default skips that filter.
+        """Filtering parameters. default skips that filter.
 
         :param catNms (str array)  : get cats for given cat names
         :param supNms (str array)  : get cats for given supercategory names
@@ -195,7 +194,7 @@ class YTVIS:
         """
         if _isArrayLike(ids):
             return [self.anns[id] for id in ids]
-        elif type(ids) == int:
+        elif isinstance(ids, int):
             return [self.anns[ids]]
 
     def loadCats(self, ids=[]):
@@ -206,7 +205,7 @@ class YTVIS:
         """
         if _isArrayLike(ids):
             return [self.cats[id] for id in ids]
-        elif type(ids) == int:
+        elif isinstance(ids, int):
             return [self.cats[ids]]
 
     def loadVids(self, ids=[]):
@@ -217,7 +216,7 @@ class YTVIS:
         """
         if _isArrayLike(ids):
             return [self.vids[id] for id in ids]
-        elif type(ids) == int:
+        elif isinstance(ids, int):
             return [self.vids[ids]]
 
     def loadRes(self, resFile):
@@ -231,14 +230,14 @@ class YTVIS:
 
         print('Loading and preparing results...')
         tic = time.time()
-        if type(resFile) == str or (PYTHON_VERSION == 2
-                                    and type(resFile) == str):
+        if isinstance(resFile, str) or (PYTHON_VERSION == 2
+                                        and isinstance(resFile, str)):
             anns = json.load(open(resFile))
-        elif type(resFile) == np.ndarray:
+        elif isinstance(resFile, np.ndarray):
             anns = self.loadNumpyAnnotations(resFile)
         else:
             anns = resFile
-        assert type(anns) == list, 'results in not an array of objects'
+        assert isinstance(anns, list), 'results in not an array of objects'
         annsVidIds = [ann['video_id'] for ann in anns]
         assert set(annsVidIds) == (set(annsVidIds) & set(self.getVidIds())), \
                'Results do not correspond to current coco set'
@@ -281,12 +280,12 @@ class YTVIS:
         t = self.vids[ann['video_id']]
         h, w = t['height'], t['width']
         segm = ann['segmentations'][frameId]
-        if type(segm) == list:
+        if isinstance(segm, list):
             # polygon -- a single object might consist of multiple parts
             # we merge all parts into one mask rle code
             rles = maskUtils.frPyObjects(segm, h, w)
             rle = maskUtils.merge(rles)
-        elif type(segm['counts']) == list:
+        elif isinstance(segm['counts'], list):
             # uncompressed RLE
             rle = maskUtils.frPyObjects(segm, h, w)
         else:

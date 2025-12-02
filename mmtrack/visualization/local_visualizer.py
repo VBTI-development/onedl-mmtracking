@@ -199,8 +199,8 @@ class TrackLocalVisualizer(Visualizer):
             assert 'pred_track_instances' in data_sample
             pred_instances = data_sample.pred_track_instances
             if 'scores' in pred_instances:
-                pred_instances = pred_instances[
-                    pred_instances.scores > pred_score_thr].cpu()
+                pred_instances = pred_instances[pred_instances.scores >
+                                                pred_score_thr].cpu()
             pred_img_data = self._draw_instances(image, pred_instances)
 
         if gt_img_data is not None and pred_img_data is not None:

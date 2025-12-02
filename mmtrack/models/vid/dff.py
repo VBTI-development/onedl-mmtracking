@@ -18,8 +18,8 @@ from .base import BaseVideoDetector
 class DFF(BaseVideoDetector):
     """Deep Feature Flow for Video Recognition.
 
-    This video object detector is the implementation of `DFF
-    <https://arxiv.org/abs/1611.07715>`_.
+    This video object detector is the implementation of
+    `DFF <https://arxiv.org/abs/1611.07715>`_.
     """
 
     def __init__(self,

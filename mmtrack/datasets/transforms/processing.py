@@ -275,7 +275,7 @@ class TridentSampling(DiMPSampling):
             a positive search image for the template image. Its length is equal
             to the number of extra templates, i.e., `num_template_frames`-1.
             Default length is 1.
-        cls_pos_prob (float, optional): the probility of sampling positive
+        cls_pos_prob (float, optional): the probability of sampling positive
             samples in classification training.
         train_cls_head (bool, optional): whether to train classification head.
         min_num_frames (int, optional): the min number of frames to be sampled.
@@ -473,7 +473,7 @@ class PairSampling(BaseTransform):
     Args:
         frame_range (List(int) | int): The sampling range of search
             frames in the same video for template frame. Defaults to 5.
-        pos_prob (float, optional):  The probility of sampling positive
+        pos_prob (float, optional):  The probability of sampling positive
             sample pairs. Defaults to 0.8.
         filter_template_img (bool, optional): If False, the template image will
             be in the sampling search candidates, otherwise, it is exclude.

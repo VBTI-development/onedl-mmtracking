@@ -150,7 +150,7 @@ class MixFormer(Stark):
 
     def forward_train(self, imgs, img_metas, search_img, search_img_metas,
                       **kwargs):
-        """forward of training.
+        """Forward of training.
 
         Args:
             img (Tensor): template images of shape (N, num_templates, C, H, W)

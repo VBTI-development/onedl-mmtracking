@@ -89,10 +89,10 @@ class YTVISeval:
             self.params.catIds = sorted(cocoGt.getCatIds())
 
     def _prepare(self):
-        '''
-        Prepare ._gts and ._dts for evaluation based on params
-        :return: None
-        '''
+        """Prepare ._gts and ._dts for evaluation based on params :return:
+
+        None.
+        """
 
         def _toMask(anns, coco):
             # modify ann['segmentation'] by reference
@@ -138,11 +138,8 @@ class YTVISeval:
         self.eval = {}  # accumulated evaluation results
 
     def evaluate(self):
-        '''
-        Run per image evaluation on given images and store
-        results (a list of dict) in self.evalVids
-        :return: None
-        '''
+        """Run per image evaluation on given images and store results (a list
+        of dict) in self.evalVids :return: None."""
         tic = time.time()
         print('Running per image evaluation...')
         p = self.params
@@ -166,8 +163,11 @@ class YTVISeval:
             computeIoU = self.computeIoU
         elif p.iouType == 'keypoints':
             computeIoU = self.computeOks
-        self.ious = {(vidId, catId): computeIoU(vidId, catId)
-                     for vidId in p.vidIds for catId in catIds}
+        self.ious = {
+            (vidId, catId): computeIoU(vidId, catId)
+            for vidId in p.vidIds
+            for catId in catIds
+        }
 
         evaluateVid = self.evaluateVid
         maxDet = p.maxDets[-1]
@@ -284,10 +284,8 @@ class YTVISeval:
         return ious
 
     def evaluateVid(self, vidId, catId, aRng, maxDet):
-        '''
-        perform evaluation for single category and image
-        :return: dict (single image results)
-        '''
+        """Perform evaluation for single category and image :return: dict
+        (single image results)"""
         p = self.params
         if p.useCats:
             gt = self._gts[vidId, catId]
