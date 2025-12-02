@@ -21,9 +21,9 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'OneDL-MMTracking'
-copyright = '2018-2021, OpenMMLab, 2025 VBTI Products BV'
-author = 'OneDL-MMTracking Authors'
+project = 'OneDL MMTracking'
+copyright = '2018-2025, OpenMMLab, 2025 VBTI Products BV'
+author = 'OneDL MMTracking Authors'
 version_file = '../../mmtrack/version.py'
 
 
@@ -92,7 +92,7 @@ html_theme_options = {
     'menu': [
         {
             'name': 'GitHub',
-            'url': 'https://github.com/open-mmlab/mmtracking'
+            'url': 'https://github.com/vbti-development/onedl-mmdetection'
         },
         {
             'name':
@@ -100,11 +100,11 @@ html_theme_options = {
             'children': [
                 {
                     'name': 'MMCV',
-                    'url': 'https://github.com/open-mmlab/mmcv',
+                    'url': 'https://github.com/vbti-development/onedl-mmcv',
                 },
                 {
                     'name': 'MMDetection',
-                    'url': 'https://github.com/open-mmlab/mmdetection',
+                    'url': 'https://github.com/vbti-development/onedl-mmdetection',
                 },
             ]
         },

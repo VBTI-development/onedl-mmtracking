@@ -7,7 +7,7 @@ import re
 
 import numpy as np
 
-url_prefix = 'https://github.com/open-mmlab/mmtracking/blob/master/'
+url_prefix = 'https://github.com/vbti-development/onedl-mmtracking/blob/main/'
 
 files = sorted(glob.glob('../../configs/*/*/README.md'))
 

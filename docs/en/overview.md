@@ -1,6 +1,6 @@
 ## Introduction
 
-MMTracking is an open source video perception toolbox by [PyTorch](https://pytorch.org/). It is a part of [OpenMMLab](https://openmmlab.com) project.
+OneDL MMTracking is an open source video perception toolbox by [PyTorch](https://pytorch.org/). It is a part of [OneDL Lab](https://github.com/VBTI-development) project.
 
 It supports 4 video tasks:
 
@@ -21,7 +21,7 @@ It supports 4 video tasks:
 
 - **Simple, Fast and Strong**
 
-  **Simple**: MMTracking interacts with other OpenMMLab projects. It is built upon [MMDetection](https://github.com/open-mmlab/mmdetection) that we can capitalize any detector only through modifying the configs.
+  **Simple**: OneDL MMTracking interacts with other OneDL Lab projects. It is built upon [OneDL-MMDetection](https://github.com/vbti-development/onedl-mmdetection) that we can capitalize any detector only through modifying the configs.
 
   **Fast**: All operations run on GPUs. The training and inference speeds are faster than or comparable to other implementations.
 
@@ -66,8 +66,8 @@ Results and models are available in the [model zoo](./model_zoo.md).
 
 ## Contributing
 
-We appreciate all contributions to improve MMTracking. Please refer to [CONTRIBUTING.md](https://github.com/open-mmlab/mmcv/blob/master/CONTRIBUTING.md) for the contributing guideline and [this discussion](https://github.com/open-mmlab/mmtracking/issues/73) for development roadmap.
+We appreciate all contributions to improve OneDLMMTracking. Please refer to [CONTRIBUTING.md](https://github.com/vbti-development/onedl-mmcv/blob/main/CONTRIBUTING.md) for the contributing guideline.
 
 ## FAQ
 
-If you encounter any problems in the process of using MMTracking, you can firstly refer to [FAQ](./notes/faq.md). If not solved, you can post an [issue](https://github.com/open-mmlab/mmtracking/issues/) and we will give a response as soon as possible.
+If you encounter any problems in the process of using OneDL MMTracking, you can firstly refer to [FAQ](./notes/faq.md). If not solved, you can post an [issue](https://github.com/vbti-development/onedl-mmtracking/issues/) and we will give a response as soon as possible.
