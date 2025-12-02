@@ -1,0 +1,1 @@
+We appreciate all contributions to improve MMDetection. Please refer to [CONTRIBUTING.md](https://github.com/vbti-development/onedl-mmcv/blob/main/CONTRIBUTING.md) in MMCV for more details about the contributing guideline.
