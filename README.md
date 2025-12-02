@@ -1,63 +1,50 @@
 <div align="center">
-  <img src="resources/mmtrack-logo.png" width="600"/>
-  <div>&nbsp;</div>
+  <picture>
+    <!-- User prefers dark mode: -->
+  <source srcset="docs/en/_static/image/onedl-mmtracking-banner-dark.png"  media="(prefers-color-scheme: dark)"/>
+
+<img src="docs/en/_static/image/onedl-mmtracking-banner.png" alt="OneDL-MMTracking logo" height="200"/>
+  </picture>
+
+<div>&nbsp;</div>
   <div align="center">
-    <b><font size="5">OpenMMLab website</font></b>
-    <sup>
-      <a href="https://openmmlab.com">
-        <i><font size="4">HOT</font></i>
-      </a>
-    </sup>
+    <a href="https://vbti.nl">
+      <b><font size="5">VBTI Website</font></b>
+    </a>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <b><font size="5">OpenMMLab platform</font></b>
-    <sup>
-      <a href="https://platform.openmmlab.com">
-        <i><font size="4">TRY IT OUT</font></i>
-      </a>
-    </sup>
+    <a href="https://onedl.ai">
+      <b><font size="5">OneDL platform</font></b>
+    </a>
   </div>
-  <div>&nbsp;</div>
+<div>&nbsp;</div>
 
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mmtrack)](https://pypi.org/project/mmtrack/)
-[![PyPI](https://img.shields.io/pypi/v/mmtrack)](https://pypi.org/project/mmtrack)
-[![docs](https://img.shields.io/badge/docs-1.x-blue)](https://mmtracking.readthedocs.io/en/1.x/)
-[![badge](https://github.com/open-mmlab/mmtracking/workflows/build/badge.svg)](https://github.com/open-mmlab/mmtracking/actions)
-[![codecov](https://codecov.io/gh/open-mmlab/mmtracking/branch/master/graph/badge.svg)](https://codecov.io/gh/open-mmlab/mmtracking)
-[![license](https://img.shields.io/github/license/open-mmlab/mmtracking.svg)](https://github.com/open-mmlab/mmtracking/blob/master/LICENSE)
+[![Docs](https://img.shields.io/badge/docs-latest-blue)](https://onedl-mmtracking.readthedocs.io/en/latest/)
+[![license](https://img.shields.io/github/license/VBTI-development/onedl-mmtracking.svg)](https://github.com/VBTI-development/onedl-mmtracking/blob/main/LICENSE)
 
-[📘Documentation](https://mmtracking.readthedocs.io/en/1.x/) |
-[🛠️Installation](https://mmtracking.readthedocs.io/en/1.x/get_started.html) |
-[👀Model Zoo](https://mmtracking.readthedocs.io/en/1.x/model_zoo.html) |
-[🆕Update News](https://mmtracking.readthedocs.io/en/1.x/notes/changelog.html) |
-[🤔Reporting Issues](https://github.com/open-mmlab/mmtracking/issues/new/choose)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/onedl-mmtracking)](https://pypi.org/project/onedl-mmtracking/)
+[![PyPI](https://img.shields.io/pypi/v/onedl-mmtracking)](https://pypi.org/project/onedl-mmtracking)
 
-</div>
+[![Build Status](https://github.com/VBTI-development/onedl-mmtracking/actions/workflows/merge_stage_test.yml/badge.svg)](https://github.com/VBTI-development/onedl-mmtracking/actions/workflows/merge_stage_test.yml)
+[![Docker Image](https://github.com/VBTI-development/onedl-mmtracking/actions/workflows/docker.yml/badge.svg)](https://hub.docker.com/r/vbti/onedl-mmtracking-cu129-torch280)
+[![open issues](https://isitmaintained.com/badge/open/VBTI-development/onedl-mmtracking.svg)](https://github.com/VBTI-development/onedl-mmtracking/issues)
+[![issue resolution](https://isitmaintained.com/badge/resolution/VBTI-development/onedl-mmtracking.svg)](https://github.com/VBTI-development/onedl-mmtracking/issues)
 
-<div align="center">
+[📘 Documentation](https://onedl-mmtracking.readthedocs.io/en/latest/) |
+[🛠️ Installation](https://onedl-mmtracking.readthedocs.io/en/latest/get_started.html) |
+[👀 Model Zoo](https://onedl-mmtracking.readthedocs.io/en/latest/model_zoo.html) |
+[🆕 Update News](https://onedl-mmtracking.readthedocs.io/en/latest/notes/changelog.html) |
+[🚀Ongoing Projects](https://github.com/vbti-development/onedl-mmtracking/projects) |
+[🤔 Reporting Issues](https://github.com/VBTI-development/onedl-mmtracking/issues/new/choose) |
 
-English | [简体中文](README_zh-CN.md)
+[![Discord Logo](https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/66e3d80db9971f10a9757c99_Symbol.svg)](https://discord.gg/8DvcVRs5Pm)
 
-</div>
-
-<div align="center">
-  <a href="https://openmmlab.medium.com/" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218352562-cdded397-b0f3-4ca1-b8dd-a60df8dca75b.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://discord.gg/raweFPmdzG" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218347213-c080267f-cbb6-443e-8532-8e1ed9a58ea9.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://twitter.com/OpenMMLab" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218346637-d30c8a0f-3eba-4699-8131-512fb06d46db.png" width="3%" alt="" /></a>
-  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
-  <a href="https://www.youtube.com/openmmlab" style="text-decoration:none;">
-    <img src="https://user-images.githubusercontent.com/25839884/218346691-ceb2116a-465a-40af-8424-9f30d2348ca9.png" width="3%" alt="" /></a>
 </div>
 
 ## Introduction
 
-MMTracking is an open source video perception toolbox by PyTorch. It is a part of [OpenMMLab](https://openmmlab.com) project.
+OneDL MMTracking is an open source video perception toolbox by PyTorch.
 
-The master branch works with **PyTorch1.6+**.
+The main branch works with **PyTorch2.8**.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/24663779/103343312-c724f480-4ac6-11eb-9c22-b56f1902584e.gif" width="800"/>
@@ -82,6 +69,10 @@ The master branch works with **PyTorch1.6+**.
   **Strong**: We reproduce state-of-the-art models and some of them even outperform the official implementations.
 
 ## What's New
+
+The VBTI development team is reviving MMLabs code, making it work with
+newer pytorch versions and fixing bugs. We are only a small team, so your help
+is appreciated.
 
 We release MMTracking 1.0.0rc0, the first version of MMTracking 1.x.
 
@@ -168,11 +159,11 @@ Supported Datasets
 
 ## Contributing
 
-We appreciate all contributions to improve MMTracking. Please refer to [CONTRIBUTING.md](https://github.com/open-mmlab/mmcv/blob/master/CONTRIBUTING.md) for the contributing guideline and [this discussion](https://github.com/open-mmlab/mmtracking/issues/73) for development roadmap.
+We appreciate all contributions to improve MMTracking. Please refer to [CONTRIBUTING.md](https://github.com/vbti-development/onedl-mmcv/blob/main/CONTRIBUTING.md) for the contributing guideline.
 
 ## Acknowledgement
 
-MMTracking is an open source project that welcome any contribution and feedback.
+OneDL-MMTracking is an open source project that welcome any contribution and feedback.
 We wish that the toolbox and benchmark could serve the growing research
 community by providing a flexible as well as standardized toolkit to reimplement existing methods
 and develop their own new video perception methods.
@@ -183,10 +174,10 @@ If you find this project useful in your research, please consider cite:
 
 ```latex
 @misc{mmtrack2020,
-    title={{MMTracking: OpenMMLab} video perception toolbox and benchmark},
-    author={MMTracking Contributors},
-    howpublished = {\url{https://github.com/open-mmlab/mmtracking}},
-    year={2020}
+    title={{OneDL MMTracking: OneDL Lab} video perception toolbox and benchmark},
+    author={OneDL-MMTracking Contributors},
+    howpublished = {\url{https://github.com/vbti-development/onedl-mmtracking}},
+    year={2025}
 }
 ```
 
@@ -194,26 +185,13 @@ If you find this project useful in your research, please consider cite:
 
 This project is released under the [Apache 2.0 license](LICENSE).
 
-## Projects in OpenMMLab
+## Projects in VBTI-development
 
-- [MMEngine](https://github.com/open-mmlab/mmengine): OpenMMLab foundational library for training deep learning models.
-- [MMCV](https://github.com/open-mmlab/mmcv): OpenMMLab foundational library for computer vision.
-- [MIM](https://github.com/open-mmlab/mim): MIM installs OpenMMLab packages.
-- [MMClassification](https://github.com/open-mmlab/mmclassification): OpenMMLab image classification toolbox and benchmark.
-- [MMDetection](https://github.com/open-mmlab/mmdetection): OpenMMLab detection toolbox and benchmark.
-- [MMDetection3D](https://github.com/open-mmlab/mmdetection3d): OpenMMLab's next-generation platform for general 3D object detection.
-- [MMYOLO](https://github.com/open-mmlab/mmyolo): OpenMMLab YOLO series toolbox and benchmark.
-- [MMRotate](https://github.com/open-mmlab/mmrotate): OpenMMLab rotated object detection toolbox and benchmark.
-- [MMSegmentation](https://github.com/open-mmlab/mmsegmentation): OpenMMLab semantic segmentation toolbox and benchmark.
-- [MMOCR](https://github.com/open-mmlab/mmocr): OpenMMLab text detection, recognition and understanding toolbox.
-- [MMPose](https://github.com/open-mmlab/mmpose): OpenMMLab pose estimation toolbox and benchmark.
-- [MMHuman3D](https://github.com/open-mmlab/mmhuman3d): OpenMMLab 3D human parametric model toolbox and benchmark.
-- [MMSelfSup](https://github.com/open-mmlab/mmselfsup): OpenMMLab self-supervised learning Toolbox and Benchmark.
-- [MMRazor](https://github.com/open-mmlab/mmrazor): OpenMMLab Model Compression Toolbox and Benchmark.
-- [MMFewShot](https://github.com/open-mmlab/mmfewshot): OpenMMLab FewShot Learning Toolbox and Benchmark.
-- [MMAction2](https://github.com/open-mmlab/mmaction2): OpenMMLab's next-generation action understanding toolbox and benchmark.
-- [MMTracking](https://github.com/open-mmlab/mmtracking): OpenMMLab video perception toolbox and benchmark.
-- [MMFlow](https://github.com/open-mmlab/mmflow): OpenMMLab optical flow toolbox and benchmark.
-- [MMEditing](https://github.com/open-mmlab/mmediting): OpenMMLab image and video editing toolbox.
-- [MMGeneration](https://github.com/open-mmlab/mmgeneration):  OpenMMLab Generative Model toolbox and benchmark.
-- [MMDeploy](https://github.com/open-mmlab/mmdeploy): OpenMMlab deep learning model deployment toolset.
+- [OneDL-MMEngine](https://github.com/vbti-development/onedl-mmengine): Foundational library for training deep learning models.
+- [OneDL-MMCV](https://github.com/vbti-development/onedl-mmcv): Foundational library for computer vision.
+- [OneDL-MMPreTrain](https://github.com/vbti-development/onedl-mmpretrain): Pre-training toolbox and benchmark.
+- [OneDL-MMDetection](https://github.com/vbti-development/onedl-mmdetection): Detection toolbox and benchmark.
+- [OneDL-MMRotate](https://github.com/vbti-development/onedl-mmrotate): Rotated object detection toolbox and benchmark.
+- [OneDL-MMSegmentation](https://github.com/vbti-development/onedl-mmsegmentation): Semantic segmentation toolbox and benchmark.
+- [OneDL-MMDeploy](https://github.com/vbti-development/onedl-mmdeploy): Model deployment framework.
+- [OneDL-MIM](https://github.com/vbti-development/onedl-mim): MIM installs VBTI packages.
