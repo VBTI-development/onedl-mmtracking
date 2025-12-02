@@ -49,13 +49,6 @@ Welcome to MMTracking's documentation!
    notes/faq.md
 
 
-.. toctree::
-   :caption: Switch Language
-
-   switch_language.md
-
-
-
 Indices and tables
 ==================
 

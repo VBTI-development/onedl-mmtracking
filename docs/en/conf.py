@@ -21,9 +21,9 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'MMTracking'
-copyright = '2018-2021, OpenMMLab'
-author = 'MMTracking Authors'
+project = 'OneDL-MMTracking'
+copyright = '2018-2021, OpenMMLab, 2025 VBTI Products BV'
+author = 'OneDL-MMTracking Authors'
 version_file = '../../mmtrack/version.py'
 
 
