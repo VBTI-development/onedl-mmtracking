@@ -121,3 +121,6 @@ mmtrack/.mim
 *.pth
 *.py~
 *.sh~
+
+# generated
+**/modelzoo_statistics.md
