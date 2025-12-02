@@ -4,9 +4,10 @@ from .byte_track import ByteTrack
 from .deep_sort import DeepSORT
 from .ocsort import OCSORT
 from .qdtrack import QDTrack
+from .strong_sort import StrongSORT
 from .tracktor import Tracktor
 
 __all__ = [
-    'BaseMultiObjectTracker', 'Tracktor', 'DeepSORT', 'ByteTrack', 'QDTrack',
-    'OCSORT'
+    'BaseMultiObjectTracker', 'ByteTrack', 'DeepSORT', 'Tracktor', 'QDTrack',
+    'StrongSORT'
 ]

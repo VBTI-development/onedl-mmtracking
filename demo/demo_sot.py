@@ -6,11 +6,14 @@ from argparse import ArgumentParser
 
 import cv2
 import mmcv
+import mmengine
 
 from mmtrack.apis import inference_sot, init_model
+from mmtrack.registry import VISUALIZERS
+from mmtrack.utils import register_all_modules
 
 
-def main():
+def parse_args():
     parser = ArgumentParser()
     parser.add_argument('config', help='Config file')
     parser.add_argument('--input', help='input video file')
@@ -30,7 +33,10 @@ def main():
     parser.add_argument('--fps', type=int, help='FPS of the output video')
     parser.add_argument('--gt_bbox_file', help='The path of gt_bbox file')
     args = parser.parse_args()
+    return args
 
+
+def main(args):
     # load images
     if osp.isdir(args.input):
         imgs = sorted(
@@ -42,8 +48,8 @@ def main():
         imgs = mmcv.VideoReader(args.input)
         IN_VIDEO = True
 
-    OUT_VIDEO = False
     # define output
+    OUT_VIDEO = False
     if args.output is not None:
         if args.output.endswith('.mp4'):
             OUT_VIDEO = True
@@ -63,10 +69,16 @@ def main():
             raise ValueError('Please set the FPS for the output video.')
         fps = int(fps)
 
+    register_all_modules(init_default_scope=True)
+
     # build the model from a config file and a checkpoint file
     model = init_model(args.config, args.checkpoint, device=args.device)
 
-    prog_bar = mmcv.ProgressBar(len(imgs))
+    # build the visualizer
+    visualizer = VISUALIZERS.build(model.cfg.visualizer)
+    visualizer.dataset_meta = model.dataset_meta
+
+    prog_bar = mmengine.ProgressBar(len(imgs))
     # test and show/save the images
     for i, img in enumerate(imgs):
         if isinstance(img, str):
@@ -74,10 +86,11 @@ def main():
             img = mmcv.imread(img_path)
         if i == 0:
             if args.gt_bbox_file is not None:
-                bboxes = mmcv.list_from_file(args.gt_bbox_file)
+                bboxes = mmengine.list_from_file(args.gt_bbox_file)
                 init_bbox = list(map(float, bboxes[0].split(',')))
             else:
                 init_bbox = list(cv2.selectROI(args.input, img, False, False))
+                cv2.destroyAllWindows()
 
             # convert (x1, y1, w, h) to (x1, y1, x2, y2)
             init_bbox[2] += init_bbox[0]
@@ -91,13 +104,19 @@ def main():
                 out_file = osp.join(out_path, img_path.rsplit(os.sep, 1)[-1])
         else:
             out_file = None
-        model.show_result(
-            img,
-            result,
+
+        # show the results
+        visualizer.add_datasample(
+            'sot',
+            img[..., ::-1],
+            data_sample=result,
             show=args.show,
-            wait_time=int(1000. / fps) if fps else 0,
+            draw_gt=False,
             out_file=out_file,
-            thickness=args.thickness)
+            wait_time=float(1 / int(fps)) if fps else 0,
+            pred_score_thr=-100,
+            step=i)
+
         prog_bar.update()
 
     if args.output and OUT_VIDEO:
@@ -108,4 +127,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    args = parse_args()
+    main(args)

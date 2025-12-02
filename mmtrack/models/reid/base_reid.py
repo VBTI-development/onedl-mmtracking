@@ -1,37 +1,52 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-from mmcls.models import ImageClassifier
-from mmcv.runner import auto_fp16
+from typing import List, Optional
 
-from ..builder import REID
+import torch
+from mmcls.models.classifiers import ImageClassifier
+
+from mmtrack.registry import MODELS
+from mmtrack.structures import ReIDDataSample
 
 
-@REID.register_module()
+@MODELS.register_module()
 class BaseReID(ImageClassifier):
-    """Base class for re-identification."""
+    """Base model for re-identification."""
 
-    def forward_train(self, img, gt_label, **kwargs):
-        """"Training forward function."""
-        if img.ndim == 5:
-            # change the shape of image tensor from NxSxCxHxW to NSxCxHxW
-            # where S is the number of samples by triplet sampling
-            img = img.view(-1, *img.shape[2:])
-            # change the shape of label tensor from NxS to NS
-            gt_label = gt_label.view(-1)
-        x = self.extract_feat(img)
-        head_outputs = self.head.forward_train(x[0])
+    def forward(self,
+                inputs: torch.Tensor,
+                data_samples: Optional[List[ReIDDataSample]] = None,
+                mode: str = 'tensor'):
+        """The unified entry for a forward process in both training and test.
 
-        losses = dict()
-        reid_loss = self.head.loss(gt_label, *head_outputs)
-        losses.update(reid_loss)
-        return losses
+        The method should accept three modes: "tensor", "predict" and "loss":
 
-    @auto_fp16(apply_to=('img', ), out_fp32=True)
-    def simple_test(self, img, **kwargs):
-        """Test without augmentation."""
-        if img.nelement() > 0:
-            x = self.extract_feat(img)
-            head_outputs = self.head.forward_train(x[0])
-            feats = head_outputs[0]
-            return feats
-        else:
-            return img.new_zeros(0, self.head.out_channels)
+        - "tensor": Forward the whole network and return tensor or tuple of
+          tensor without any post-processing, same as a common nn.Module.
+        - "predict": Forward and return the predictions, which are fully
+          processed to a list of :obj:`ReIDDataSample`.
+        - "loss": Forward and return a dict of losses according to the given
+          inputs and data samples.
+
+        Note that this method doesn't handle neither back propagation nor
+        optimizer updating, which are done in the :meth:`train_step`.
+
+        Args:
+            inputs (torch.Tensor): The input tensor with shape
+                (N, C, H, W) or (N, T, C, H, W).
+            data_samples (List[ReIDDataSample], optional): The annotation
+                data of every sample. It's required if ``mode="loss"``.
+                Defaults to None.
+            mode (str): Return what kind of value. Defaults to 'tensor'.
+
+        Returns:
+            The return type depends on ``mode``.
+
+            - If ``mode="tensor"``, return a tensor or a tuple of tensor.
+            - If ``mode="predict"``, return a list of
+              :obj:`ReIDDataSample`.
+            - If ``mode="loss"``, return a dict of tensor.
+        """
+        if len(inputs.size()) == 5:
+            assert inputs.size(0) == 1
+            inputs = inputs[0]
+        return super().forward(inputs, data_samples, mode)

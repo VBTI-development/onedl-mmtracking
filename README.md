@@ -20,15 +20,15 @@
 
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mmtrack)](https://pypi.org/project/mmtrack/)
 [![PyPI](https://img.shields.io/pypi/v/mmtrack)](https://pypi.org/project/mmtrack)
-[![docs](https://img.shields.io/badge/docs-latest-blue)](https://mmtracking.readthedocs.io/en/latest/)
+[![docs](https://img.shields.io/badge/docs-1.x-blue)](https://mmtracking.readthedocs.io/en/1.x/)
 [![badge](https://github.com/open-mmlab/mmtracking/workflows/build/badge.svg)](https://github.com/open-mmlab/mmtracking/actions)
 [![codecov](https://codecov.io/gh/open-mmlab/mmtracking/branch/master/graph/badge.svg)](https://codecov.io/gh/open-mmlab/mmtracking)
 [![license](https://img.shields.io/github/license/open-mmlab/mmtracking.svg)](https://github.com/open-mmlab/mmtracking/blob/master/LICENSE)
 
-[📘Documentation](https://mmtracking.readthedocs.io/) |
-[🛠️Installation](https://mmtracking.readthedocs.io/en/latest/install.html) |
-[👀Model Zoo](https://mmtracking.readthedocs.io/en/latest/model_zoo.html) |
-[🆕Update News](https://mmtracking.readthedocs.io/en/latest/changelog.html) |
+[📘Documentation](https://mmtracking.readthedocs.io/en/1.x/) |
+[🛠️Installation](https://mmtracking.readthedocs.io/en/1.x/get_started.html) |
+[👀Model Zoo](https://mmtracking.readthedocs.io/en/1.x/model_zoo.html) |
+[🆕Update News](https://mmtracking.readthedocs.io/en/1.x/notes/changelog.html) |
 [🤔Reporting Issues](https://github.com/open-mmlab/mmtracking/issues/new/choose)
 
 </div>
@@ -39,11 +39,25 @@ English | [简体中文](README_zh-CN.md)
 
 </div>
 
+<div align="center">
+  <a href="https://openmmlab.medium.com/" style="text-decoration:none;">
+    <img src="https://user-images.githubusercontent.com/25839884/218352562-cdded397-b0f3-4ca1-b8dd-a60df8dca75b.png" width="3%" alt="" /></a>
+  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
+  <a href="https://discord.gg/raweFPmdzG" style="text-decoration:none;">
+    <img src="https://user-images.githubusercontent.com/25839884/218347213-c080267f-cbb6-443e-8532-8e1ed9a58ea9.png" width="3%" alt="" /></a>
+  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
+  <a href="https://twitter.com/OpenMMLab" style="text-decoration:none;">
+    <img src="https://user-images.githubusercontent.com/25839884/218346637-d30c8a0f-3eba-4699-8131-512fb06d46db.png" width="3%" alt="" /></a>
+  <img src="https://user-images.githubusercontent.com/25839884/218346358-56cc8e2f-a2b8-487f-9088-32480cceabcf.png" width="3%" alt="" />
+  <a href="https://www.youtube.com/openmmlab" style="text-decoration:none;">
+    <img src="https://user-images.githubusercontent.com/25839884/218346691-ceb2116a-465a-40af-8424-9f30d2348ca9.png" width="3%" alt="" /></a>
+</div>
+
 ## Introduction
 
 MMTracking is an open source video perception toolbox by PyTorch. It is a part of [OpenMMLab](https://openmmlab.com) project.
 
-The master branch works with **PyTorch1.5+**.
+The master branch works with **PyTorch1.6+**.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/24663779/103343312-c724f480-4ac6-11eb-9c22-b56f1902584e.gif" width="800"/>
@@ -61,7 +75,7 @@ The master branch works with **PyTorch1.5+**.
 
 - **Simple, Fast and Strong**
 
-  **Simple**: MMTracking interacts with other OpenMMLab projects. It is built upon [MMDetection](https://github.com/open-mmlab/mmdetection) that we can capitalize any detector only through modifying the configs.
+  **Simple**: MMTracking interacts with other OpenMMLab projects. It is built upon [MMDetection](https://github.com/open-mmlab/mmdetection/tree/3.x) that we can capitalize any detector only through modifying the configs.
 
   **Fast**: All operations run on GPUs. The training and inference speeds are faster than or comparable to other implementations.
 
@@ -77,17 +91,15 @@ We also support more methods in MMTracking 1.x, such as [StrongSORT](https://git
 
 Please refer to [dev-1.x](https://github.com/open-mmlab/mmtracking/tree/dev-1.x) branch for the using of MMTracking 1.x.
 
-## Installation
+## Get Started
 
-Please refer to [install.md](docs/en/install.md) for install instructions.
+Please refer to [get_started.md](docs/en/get_started.md) for install instructions.
 
-## Getting Started
+Please refer to [inference.md](docs/en/user_guides/3_inference.md) for the basic usage of MMTracking. If you want to train and test your own model, please see [dataset_prepare.md](docs/en/user_guides/2_dataset_prepare.md) and [train_test.md](docs/en/user_guides/4_train_test.md).
 
-Please see [dataset.md](docs/en/dataset.md) and [quick_run.md](docs/en/quick_run.md) for the basic usage of MMTracking.
+A Colab tutorial is also provided. You may preview the notebook [here](./demo/MMTracking_Tutorial.ipynb) or directly run it on [Colab](https://colab.research.google.com/github/open-mmlab/mmtracking/blob/master/demo/MMTracking_Tutorial.ipynb).
 
-A Colab tutorial is provided. You may preview the notebook [here](./demo/MMTracking_Tutorial.ipynb) or directly run it on [Colab](https://colab.research.google.com/github/open-mmlab/mmtracking/blob/master/demo/MMTracking_Tutorial.ipynb).
-
-There are also usage [tutorials](docs/en/tutorials/), such as [learning about configs](docs/en/tutorials/config.md), [an example about detailed description of vid config](docs/en/tutorials/config_vid.md), [an example about detailed description of mot config](docs/en/tutorials/config_mot.md), [an example about detailed description of sot config](docs/en/tutorials/config_sot.md), [customizing dataset](docs/en/tutorials/customize_dataset.md), [customizing data pipeline](docs/en/tutorials/customize_data_pipeline.md), [customizing vid model](docs/en/tutorials/customize_vid_model.md), [customizing mot model](docs/en/tutorials/customize_mot_model.md), [customizing sot model](docs/en/tutorials/customize_sot_model.md), [customizing runtime settings](docs/en/tutorials/customize_runtime.md) and [useful tools](docs/en/useful_tools_scripts.md).
+There are also usage [tutorials](docs/en/user_guides/), such as [learning about configs](docs/en/user_guides/1_config.md), [visualization](docs/en/user_guides/5_visualization.md), [analysis tools](docs/en/user_guides/6_analysis_tools.md),
 
 ## Benchmark and model zoo
 
@@ -128,7 +140,8 @@ Supported Datasets
 
 Supported Methods
 
-- [x] [SORT/DeepSORT](configs/mot/deepsort) (ICIP 2016/2017)
+- [x] [SORT](configs/mot/sort) (ICIP 2016)
+- [x] [DeepSORT](configs/mot/deepsort) (ICIP 2017)
 - [x] [Tracktor](configs/mot/tracktor) (ICCV 2019)
 - [x] [QDTrack](configs/mot/qdtrack) (CVPR 2021)
 - [x] [ByteTrack](configs/mot/bytetrack) (ECCV 2022)
@@ -147,6 +160,7 @@ Supported Datasets
 Supported Methods
 
 - [x] [MaskTrack R-CNN](configs/vis/masktrack_rcnn) (ICCV 2019)
+- [x] [Mask2Former](configs/vis/mask2former) (CVPR 2022)
 
 Supported Datasets
 
@@ -182,6 +196,7 @@ This project is released under the [Apache 2.0 license](LICENSE).
 
 ## Projects in OpenMMLab
 
+- [MMEngine](https://github.com/open-mmlab/mmengine): OpenMMLab foundational library for training deep learning models.
 - [MMCV](https://github.com/open-mmlab/mmcv): OpenMMLab foundational library for computer vision.
 - [MIM](https://github.com/open-mmlab/mim): MIM installs OpenMMLab packages.
 - [MMClassification](https://github.com/open-mmlab/mmclassification): OpenMMLab image classification toolbox and benchmark.

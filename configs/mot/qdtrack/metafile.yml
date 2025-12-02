@@ -8,14 +8,14 @@ Collections:
       Architecture:
         - ResNet
     Paper:
-        URL: https://arxiv.org/pdf/2006.06664.pdf
-        Title: Quasi-Dense Similarity Learning for Multiple Object Tracking
+      URL: https://arxiv.org/pdf/2006.06664.pdf
+      Title: Quasi-Dense Similarity Learning for Multiple Object Tracking
     README: configs/mot/qdtrack/README.md
 
 Models:
-  - Name: qdtrack_faster-rcnn_r50_fpn_4e_mot17-private-half
+  - Name: qdtrack_faster-rcnn_r50_fpn_8xb2-4e_mot17halftrain_test-mot17halfval
     In Collection: QDTrack
-    Config: configs/mot/qdtrack/qdtrack_faster-rcnn_r50_fpn_4e_mot17-private-half.py
+    Config: configs/mot/qdtrack/qdtrack_faster-rcnn_r50_fpn_8xb2-4e_mot17halftrain_test-mot17halfval.py
     Metadata:
       Training Data: MOT17
       Training Memory (GB): 5.83
@@ -29,9 +29,9 @@ Models:
           IDF1: 68.5
     Weights: https://download.openmmlab.com/mmtracking/mot/qdtrack/mot_dataset/qdtrack_faster-rcnn_r50_fpn_4e_mot17_20220315_145635-76f295ef.pth
 
-  - Name: qdtrack_faster-rcnn_r50_fpn_4e_crowdhuman_mot17-private-half
+  - Name: qdtrack_faster-rcnn_r50_fpn_8xb2-4e_crowdhuman-mot17halftrain_test-mot17halfval
     In Collection: QDTrack
-    Config: configs/mot/qdtrack/qdtrack_faster-rcnn_r50_fpn_4e_crowdhuman_mot17-private-half.py
+    Config: configs/mot/qdtrack/qdtrack_faster-rcnn_r50_fpn_8xb2-4e_crowdhuman-mot17halftrain_test-mot17halfval.py
     Metadata:
       Training Data: MOT17, crowdhuman
       Training Memory (GB): 6.31

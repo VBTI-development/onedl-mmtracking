@@ -1,58 +1,46 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-import pytest
+from unittest import TestCase
+
 import torch
+from parameterized import parameterized
 
-from mmtrack.models import REID
+from mmtrack.registry import MODELS
+from mmtrack.structures import ReIDDataSample
+from mmtrack.testing import get_model_cfg
+from mmtrack.utils import register_all_modules
 
 
-@pytest.mark.parametrize('model_type', ['BaseReID'])
-def test_base_reid(model_type):
-    model_class = REID.get(model_type)
-    backbone = dict(
-        type='ResNet',
-        depth=50,
-        num_stages=4,
-        out_indices=(3, ),
-        style='pytorch')
-    neck = dict(type='GlobalAveragePooling', kernel_size=(8, 4), stride=1)
-    head = dict(
-        type='LinearReIDHead',
-        num_fcs=1,
-        in_channels=2048,
-        fc_channels=1024,
-        out_channels=128,
-        num_classes=378,
-        loss=dict(type='CrossEntropyLoss', loss_weight=1.0),
-        loss_pairwise=dict(type='TripletLoss', margin=0.3, loss_weight=1.0),
-        norm_cfg=dict(type='BN1d'),
-        act_cfg=dict(type='ReLU'))
-    model = model_class(backbone=backbone, neck=neck, head=head)
-    model.train()
-    x = torch.randn(32, 3, 256, 128)
-    label = torch.randperm(32)
-    outputs = model.forward_train(x, label)
-    assert isinstance(outputs, dict)
-    assert len(outputs) == 3
-    assert 'triplet_loss' in outputs
-    assert 'ce_loss' in outputs
-    assert 'accuracy' in outputs
-    model.eval()
-    x = torch.randn(1, 3, 256, 128)
-    outputs = model.simple_test(x)
-    assert outputs.shape == (1, 128)
+class TestBaseReID(TestCase):
 
-    head['num_classes'] = None
-    # when loss_pairwise is set, num_classes must be a current number
-    with pytest.raises(TypeError):
-        model = model_class(backbone=backbone, neck=neck, head=head)
+    @classmethod
+    def setUpClass(cls) -> None:
+        register_all_modules()
 
-    head['num_classes'] = 378
-    head['loss'] = None
-    # when loss_pairwise is set, num_classes will be ignored.
-    with pytest.warns(UserWarning):
-        model = model_class(backbone=backbone, neck=neck, head=head)
+    @parameterized.expand([
+        'reid/reid_r50_8xb32-6e_mot17train80_test-mot17val20.py',
+    ])
+    def test_forward(self, cfg_file):
+        model_cfg = get_model_cfg(cfg_file)
+        model = MODELS.build(model_cfg)
+        inputs = torch.rand(1, 4, 3, 256, 128)
+        data_samples = [
+            ReIDDataSample().set_gt_label(label) for label in (0, 0, 1, 1)
+        ]
 
-    head['loss_pairwise'] = None
-    # two losses cannot be none at the same time
-    with pytest.raises(ValueError):
-        model = model_class(backbone=backbone, neck=neck, head=head)
+        # test mode='tensor'
+        feats = model(inputs, mode='tensor')
+        assert feats.shape == (4, 128)
+
+        # test mode='loss'
+        losses = model(inputs, data_samples, mode='loss')
+        assert losses.keys() == {'triplet_loss', 'ce_loss', 'accuracy_top-1'}
+        assert losses['ce_loss'].item() > 0
+        assert losses['triplet_loss'].item() > 0
+
+        # test mode='predict'
+        predictions = model(inputs, data_samples, mode='predict')
+        for pred in predictions:
+            assert isinstance(pred, ReIDDataSample)
+            assert isinstance(pred.pred_feature, torch.Tensor)
+            assert isinstance(pred.gt_label.label, torch.Tensor)
+            assert pred.pred_feature.shape == (128, )

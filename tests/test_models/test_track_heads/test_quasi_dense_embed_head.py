@@ -1,87 +1,118 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-import mmcv
+from unittest import TestCase
+
+import mmengine
 import torch
-from mmdet.core import build_assigner, build_sampler
+from mmengine.structures import InstanceData
 
 from mmtrack.models.track_heads import QuasiDenseEmbedHead
+from mmtrack.registry import TASK_UTILS
 
 
-def test_quasi_dense_embed_head():
-    cfg = mmcv.Config(
-        dict(
-            num_convs=4,
-            num_fcs=1,
-            embed_channels=256,
-            norm_cfg=dict(type='GN', num_groups=32),
-            loss_track=dict(type='MultiPosCrossEntropyLoss', loss_weight=0.25),
-            loss_track_aux=dict(
-                type='L2Loss',
-                neg_pos_ub=3,
-                pos_margin=0,
-                neg_margin=0.1,
-                hard_mining=True,
-                loss_weight=1.0)))
-
-    self = QuasiDenseEmbedHead(**cfg)
-
-    gt_match_indices = [torch.tensor([0, 1])]
-    proposal_list = [
-        torch.Tensor([[23.6667, 23.8757, 228.6326, 153.8874],
-                      [23.6667, 23.8757, 228.6326, 153.8874]])
-    ]
-    gt_bboxes = [
-        torch.Tensor([[23.6667, 23.8757, 228.6326, 153.8874],
-                      [23.6667, 23.8757, 228.6326, 153.8874]])
-    ]
-    gt_labels = [torch.LongTensor([1, 1])]
-
-    feats = torch.rand(2, 256, 7, 7)
-    key_sampling_results = _dummy_bbox_sampling(feats, proposal_list,
-                                                gt_bboxes, gt_labels)
-    ref_sampling_results = key_sampling_results
-
-    key_embeds = self.forward(feats)
-    ref_embeds = key_embeds
-
-    match_feats = self.match(key_embeds, ref_embeds, key_sampling_results,
-                             ref_sampling_results)
-    asso_targets = self.get_targets(gt_match_indices, key_sampling_results,
-                                    ref_sampling_results)
-    loss_track = self.loss(*match_feats, *asso_targets)
-    assert loss_track['loss_track'] >= 0, 'track loss should be zero'
-    assert loss_track['loss_track_aux'] > 0, 'aux loss should be non-zero'
-
-
-def _dummy_bbox_sampling(feats, proposal_list, gt_bboxes, gt_labels):
+def _dummy_bbox_sampling(rpn_results_list, batch_gt_instances):
     """Create sample results that can be passed to Head.get_targets."""
-    num_imgs = len(proposal_list)
+    num_imgs = len(rpn_results_list)
+    feat = torch.rand(1, 1, 3, 3)
     assign_config = dict(
-        type='MaxIoUAssigner',
+        type='mmdet.MaxIoUAssigner',
+        _scope_='mmdet',
         pos_iou_thr=0.5,
         neg_iou_thr=0.5,
         min_pos_iou=0.5,
         ignore_iof_thr=-1)
     sampler_config = dict(
         type='CombinedSampler',
+        _scope_='mmdet',
         num=4,
         pos_fraction=0.5,
         neg_pos_ub=3,
         add_gt_as_proposals=True,
         pos_sampler=dict(type='InstanceBalancedPosSampler'),
         neg_sampler=dict(type='RandomSampler'))
-    bbox_assigner = build_assigner(assign_config)
-    bbox_sampler = build_sampler(sampler_config)
-    gt_bboxes_ignore = [None for _ in range(num_imgs)]
+    bbox_assigner = TASK_UTILS.build(assign_config)
+    bbox_sampler = TASK_UTILS.build(sampler_config)
+
     sampling_results = []
     for i in range(num_imgs):
-        assign_result = bbox_assigner.assign(proposal_list[i], gt_bboxes[i],
-                                             gt_bboxes_ignore[i], gt_labels[i])
+        assign_result = bbox_assigner.assign(rpn_results_list[i],
+                                             batch_gt_instances[i])
         sampling_result = bbox_sampler.sample(
             assign_result,
-            proposal_list[i],
-            gt_bboxes[i],
-            gt_labels[i],
-            feats=feats)
+            rpn_results_list[i],
+            batch_gt_instances[i],
+            feats=feat)
         sampling_results.append(sampling_result)
 
     return sampling_results
+
+
+class TestQuasiDenseEmbedHead(TestCase):
+
+    def test_quasi_dense_embed_head_loss(self):
+        cfg = mmengine.Config(
+            dict(
+                num_convs=4,
+                num_fcs=1,
+                embed_channels=256,
+                norm_cfg=dict(type='GN', num_groups=32),
+                loss_track=dict(
+                    type='MultiPosCrossEntropyLoss', loss_weight=0.25),
+                loss_track_aux=dict(
+                    type='L2Loss',
+                    neg_pos_ub=3,
+                    pos_margin=0,
+                    neg_margin=0.1,
+                    hard_mining=True,
+                    loss_weight=1.0)))
+
+        embed_head = QuasiDenseEmbedHead(**cfg)
+
+        key_feats = torch.rand(2, 256, 7, 7)
+        ref_feats = key_feats
+        rpn_results = InstanceData()
+        rpn_results.labels = torch.LongTensor([1, 2])
+        rpn_results.priors = torch.Tensor(
+            [[23.6667, 23.8757, 238.6326, 151.8874],
+             [23.6667, 23.8757, 238.6326, 151.8874]])
+        rpn_results_list = [rpn_results]
+
+        gt_instance = InstanceData()
+        gt_instance.labels = torch.LongTensor([1, 2])
+        gt_instance.bboxes = torch.Tensor(
+            [[23.6667, 23.8757, 238.6326, 151.8874],
+             [23.6667, 23.8757, 238.6326, 151.8874]])
+        gt_instance.instances_id = torch.LongTensor([1, 2])
+        batch_gt_instances = [gt_instance]
+
+        sampling_results = _dummy_bbox_sampling(rpn_results_list,
+                                                batch_gt_instances)
+        gt_match_indices_list = [torch.Tensor([0, 1])]
+        loss_track = embed_head.loss(key_feats, ref_feats, sampling_results,
+                                     sampling_results, gt_match_indices_list)
+        assert loss_track['loss_track'] >= 0, 'track loss should be zero'
+        assert loss_track['loss_track_aux'] > 0, 'aux loss should be non-zero'
+
+    def test_quasi_dense_embed_head_predict(self):
+        cfg = mmengine.Config(
+            dict(
+                num_convs=4,
+                num_fcs=1,
+                embed_channels=256,
+                norm_cfg=dict(type='GN', num_groups=32),
+                loss_track=dict(
+                    type='MultiPosCrossEntropyLoss', loss_weight=0.25),
+                loss_track_aux=dict(
+                    type='L2Loss',
+                    neg_pos_ub=3,
+                    pos_margin=0,
+                    neg_margin=0.1,
+                    hard_mining=True,
+                    loss_weight=1.0)))
+
+        embed_head = QuasiDenseEmbedHead(**cfg)
+
+        key_feats = torch.rand(2, 256, 7, 7)
+        track_feats = embed_head.predict(key_feats)
+
+        assert isinstance(track_feats, torch.Tensor)
+        assert track_feats.size() == (2, 256)
