@@ -3,6 +3,7 @@ import time
 import unittest
 from unittest import TestCase
 
+from referencing import Registry
 import torch
 from mmengine.logging import MessageHub
 from parameterized import parameterized
@@ -10,6 +11,8 @@ from parameterized import parameterized
 from mmtrack.registry import MODELS
 from mmtrack.testing import demo_mm_inputs, get_model_cfg
 from mmtrack.utils import register_all_modules
+
+from mmpretrain.registry import MODELS as MMPRETRAIN_MODELS
 
 
 class TestDeepSORT(TestCase):

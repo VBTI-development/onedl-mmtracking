@@ -250,5 +250,6 @@
             "is_vid_train_frame": true,
             "visibility": 1.0
         }
-    ]
+    ],
+    "info": null
 }

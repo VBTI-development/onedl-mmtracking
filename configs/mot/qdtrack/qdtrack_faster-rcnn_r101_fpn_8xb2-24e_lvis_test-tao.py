@@ -70,5 +70,5 @@ val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 
 # evaluator
-val_evaluator = dict(type='TAOMetric', metric=['bbox'])
+val_evaluator = dict(type='SOTMetric', metric=['OPE'])
 test_evaluator = val_evaluator

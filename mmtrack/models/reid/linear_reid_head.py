@@ -4,7 +4,7 @@ from typing import List, Optional, Tuple, Union
 
 import torch
 import torch.nn as nn
-from mmcls.evaluation.metrics import Accuracy
+from mmpretrain.evaluation.metrics import Accuracy
 from mmengine.model import BaseModule
 
 from mmtrack.registry import MODELS

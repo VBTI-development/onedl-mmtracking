@@ -215,7 +215,7 @@ def _plt_show_wrong_tracks(img: Union[str, np.ndarray],
                 left_top,
                 w,
                 h,
-                thickness,
+                linewidth=thickness,
                 edgecolor=bbox_colors[error_type],
                 facecolor='none'))
 
@@ -230,7 +230,7 @@ def _plt_show_wrong_tracks(img: Union[str, np.ndarray],
             Rectangle((left_top[0], left_top[1]),
                       width,
                       text_height,
-                      thickness,
+                      linewidth=thickness,
                       edgecolor=bbox_colors[error_type],
                       facecolor=bbox_colors[error_type]))
 
@@ -247,7 +247,7 @@ def _plt_show_wrong_tracks(img: Union[str, np.ndarray],
             Rectangle((left_top[0], left_top[1] + text_height + 1),
                       width,
                       text_height,
-                      thickness,
+                      linewidth=thickness,
                       edgecolor=bbox_colors[error_type],
                       facecolor=bbox_colors[error_type]))
         plt.text(

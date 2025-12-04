@@ -45,6 +45,6 @@ optim_wrapper = dict(
     optimizer=dict(type='SGD', lr=0.002, momentum=0.9, weight_decay=0.0001),
     clip_grad=None)
 
-val_evaluator = dict(type='TAOMetric', metric=['tao_track_ap'])
+val_evaluator = dict(type='SOTMetric', metric=['OPE'])
 test_evaluator = val_evaluator
 load_from = None

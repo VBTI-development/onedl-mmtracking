@@ -1,10 +1,12 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 
-import torch
-from mmdet.models import build_detector
+from typing import Dict, Optional
 
-from mmtrack.core import outs2results, results2outs
-from ..builder import MODELS, build_motion, build_tracker
+from torch import Tensor
+
+from mmtrack.registry import MODELS, TASK_UTILS
+from mmtrack.utils import OptConfigType, SampleList
+
 from .base import BaseMultiObjectTracker
 
 
@@ -31,66 +33,62 @@ class OCSORT(BaseMultiObjectTracker):
         super().__init__(init_cfg)
 
         if detector is not None:
-            self.detector = build_detector(detector)
+            self.detector = MODELS.build(detector)
 
         if motion is not None:
-            self.motion = build_motion(motion)
+            self.motion = TASK_UTILS.build(motion)
 
         if tracker is not None:
-            self.tracker = build_tracker(tracker)
+            self.tracker = MODELS.build(tracker)
 
-    def forward_train(self, *args, **kwargs):
-        """Forward function during training."""
-        return self.detector.forward_train(*args, **kwargs)
 
-    def simple_test(self, img, img_metas, rescale=False, **kwargs):
-        """Test without augmentations.
+    def predict(self,
+                inputs: Dict[str, Tensor],
+                data_samples: SampleList,
+                rescale: bool = True,
+                **kwargs) -> SampleList:
+        """Predict results from a batch of inputs and data samples with post-
+        processing.
 
         Args:
-            img (Tensor): of shape (N, C, H, W) encoding input images.
-                Typically these should be mean centered and std scaled.
-            img_metas (list[dict]): list of image info dict where each dict
-                has: 'img_shape', 'scale_factor', 'flip', and may also contain
-                'filename', 'ori_shape', 'pad_shape', and 'img_norm_cfg'.
-            rescale (bool, optional): If False, then returned bboxes and masks
+            inputs (Dict[str, Tensor]): of shape (N, T, C, H, W) encoding
+                input images. Typically these should be mean centered and std
+                scaled. The N denotes batch size.The T denotes the number of
+                key/reference frames.
+                - img (Tensor) : The key images.
+                - ref_img (Tensor): The reference images.
+            data_samples (list[:obj:`TrackDataSample`]): The batch
+                data samples. It usually includes information such
+                as `gt_instance`.
+            rescale (bool, Optional): If False, then returned bboxes and masks
                 will fit the scale of img, otherwise, returned bboxes and masks
-                will fit the scale of original image shape. Defaults to False.
+                will fit the scale of original image shape. Defaults to True.
 
         Returns:
-            dict[str : list(ndarray)]: The tracking results.
+            SampleList: Tracking results of the
+                input images. Each TrackDataSample usually contains
+                ``pred_det_instances`` or ``pred_track_instances``.
         """
-        frame_id = img_metas[0].get('frame_id', -1)
-        if frame_id == 0:
-            self.tracker.reset()
+        img = inputs['img']
+        img = img[0]
 
-        det_results = self.detector.simple_test(
-            img, img_metas, rescale=rescale)
+        assert len(data_samples) == 1, 'Batch inference is not supported.'
+
+        track_data_sample = data_samples[0]
+
+        det_results = self.detector.predict(img, data_samples)
         assert len(det_results) == 1, 'Batch inference is not supported.'
-        bbox_results = det_results[0]
-        num_classes = len(bbox_results)
+        track_data_sample.pred_det_instances = det_results[
+            0].pred_instances.clone()
 
-        outs_det = results2outs(bbox_results=bbox_results)
-        det_bboxes = torch.from_numpy(outs_det['bboxes']).to(img)
-        det_labels = torch.from_numpy(outs_det['labels']).to(img).long()
-
-        track_bboxes, track_labels, track_ids = self.tracker.track(
-            img=img,
-            img_metas=img_metas,
+        pred_track_instances = self.tracker.track(
             model=self,
-            bboxes=det_bboxes,
-            labels=det_labels,
-            frame_id=frame_id,
+            img=img,
+            feats=None,
+            data_sample=track_data_sample,
+            data_preprocessor=self.preprocess_cfg,
             rescale=rescale,
             **kwargs)
+        track_data_sample.pred_track_instances = pred_track_instances
 
-        track_results = outs2results(
-            bboxes=track_bboxes,
-            labels=track_labels,
-            ids=track_ids,
-            num_classes=num_classes)
-        det_results = outs2results(
-            bboxes=det_bboxes, labels=det_labels, num_classes=num_classes)
-
-        return dict(
-            det_bboxes=det_results['bbox_results'],
-            track_bboxes=track_results['bbox_results'])
+        return [track_data_sample]

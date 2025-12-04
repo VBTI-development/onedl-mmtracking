@@ -1,10 +1,9 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import torch
-from mmdet.core.bbox.transforms import bbox_xyxy_to_cxcywh
-from mmdet.models.builder import build_backbone, build_head
+from mmdet.structures.bbox import bbox_xyxy_to_cxcywh
+from mmtrack.registry import MODELS
 from torchvision.transforms.functional import normalize
 
-from ..builder import MODELS
 from .stark import Stark
 
 
@@ -25,8 +24,8 @@ class MixFormer(Stark):
                  train_cfg=None,
                  test_cfg=None):
         super(Stark, self).__init__(init_cfg)
-        self.backbone = build_backbone(backbone)
-        self.head = build_head(head)
+        self.backbone = MODELS.build(backbone)
+        self.head = MODELS.build(head)
 
         self.test_cfg = test_cfg
         self.train_cfg = train_cfg

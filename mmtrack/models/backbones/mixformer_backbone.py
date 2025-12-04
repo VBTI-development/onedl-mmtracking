@@ -10,11 +10,11 @@ from einops import rearrange
 from mmcv.cnn import build_norm_layer
 from mmcv.cnn.bricks.drop import DropPath
 from mmcv.cnn.bricks.transformer import FFN
-from mmcv.cnn.utils.weight_init import trunc_normal_
-from mmcv.runner import BaseModule
-from mmdet.models.builder import BACKBONES
+from mmengine.model.weight_init import trunc_normal_
+from mmengine.model import BaseModule
+from mmtrack.registry import MODELS
 
-from mmtrack.core.utils.misc import ntuple
+from mmtrack.utils.misc import ntuple
 
 to_2tuple = ntuple(2)
 
@@ -690,7 +690,7 @@ class ConvVisionTransformerLayer(BaseModule):
         return template, online_template
 
 
-@BACKBONES.register_module()
+@MODELS.register_module()
 class ConvVisionTransformer(BaseModule):
     """Vision Transformer with support for patch or hybrid CNN input stage.
 

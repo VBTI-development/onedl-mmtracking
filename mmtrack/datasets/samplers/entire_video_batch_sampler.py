@@ -1,5 +1,5 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-from typing import Sequence
+from typing import Iterator
 
 from torch.utils.data import BatchSampler, Sampler
 
@@ -33,7 +33,7 @@ class EntireVideoBatchSampler(BatchSampler):
         self.batch_size = batch_size
         self.drop_last = drop_last
 
-    def __iter__(self) -> Sequence[int]:
+    def __iter__(self) -> Iterator[list[int]]:
         batch = []
         for idx in self.sampler:
             data_info = self.sampler.dataset.get_data_info(idx)

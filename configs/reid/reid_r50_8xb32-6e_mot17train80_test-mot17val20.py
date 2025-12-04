@@ -4,12 +4,12 @@ _base_ = [
 model = dict(
     type='BaseReID',
     data_preprocessor=dict(
-        type='mmcls.ClsDataPreprocessor',
+        type='mmpretrain.ClsDataPreprocessor',
         mean=[123.675, 116.28, 103.53],
         std=[58.395, 57.12, 57.375],
         to_rgb=True),
     backbone=dict(
-        type='mmcls.ResNet',
+        type='mmpretrain.ResNet',
         depth=50,
         num_stages=4,
         out_indices=(3, ),
@@ -22,7 +22,7 @@ model = dict(
         fc_channels=1024,
         out_channels=128,
         num_classes=380,
-        loss_cls=dict(type='mmcls.CrossEntropyLoss', loss_weight=1.0),
+        loss_cls=dict(type='mmpretrain.CrossEntropyLoss', loss_weight=1.0),
         loss_triplet=dict(type='TripletLoss', margin=0.3, loss_weight=1.0),
         norm_cfg=dict(type='BN1d'),
         act_cfg=dict(type='ReLU')),

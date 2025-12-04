@@ -12,6 +12,12 @@ try:
 except ImportError:
     vot = None
 
+# TODO: check values
+# VOT Special codes:
+VOT_SPECIAL_UNKNOWN = 0
+VOT_SPECIAL_INITIALIZATION = 1
+VOT_SPECIAL_FAILURE = 2
+
 
 def bbox2region(bbox: np.ndarray) -> 'Union[Rectangle, Polygon]':
     """Convert bbox to Rectangle or Polygon Class object.
@@ -131,12 +137,12 @@ def calc_accuracy(gt_trajectory: List[List],
     mask = np.ones(len(overlaps), dtype=bool)
 
     for i, region in enumerate(pred_traj_region):
-        if is_special(region, Special.UNKNOWN) and ignore_unknown:
+        if is_special(region, VOT_SPECIAL_UNKNOWN) and ignore_unknown:
             mask[i] = False
-        elif is_special(region, Special.INITIALIZATION):
+        elif is_special(region, VOT_SPECIAL_INITIALIZATION):
             for j in range(i, min(len(pred_traj_region), i + burnin)):
                 mask[j] = False
-        elif is_special(region, Special.FAILURE):
+        elif is_special(region, VOT_SPECIAL_FAILURE):
             mask[i] = False
     return np.mean(overlaps[mask]).item() if any(mask) else 0.
 

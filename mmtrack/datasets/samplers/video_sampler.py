@@ -2,7 +2,7 @@
 from typing import Iterator, Sized
 
 import numpy as np
-from torch.utils.data import DistributedSampler as _DistributedSampler
+from mmengine.dist import get_dist_info
 from torch.utils.data import Sampler
 
 from mmtrack.datasets import BaseSOTDataset, BaseVideoDataset
@@ -20,39 +20,13 @@ class VideoSampler(Sampler):
 
     def __init__(self, dataset: Sized, seed: int = 0) -> None:
         self.dataset = dataset
-        self.indices = []
-        for video_ind, num_frames in enumerate(
-                self.dataset.num_frames_per_video):
-            self.indices.extend([(video_ind, frame_ind)
-                                 for frame_ind in range(num_frames)])
+        assert self.dataset.test_mode
 
-    def __iter__(self):
-        return iter(self.indices)
+        rank, world_size = get_dist_info()
+        self.rank = rank
+        self.world_size = world_size
 
-    def __len__(self):
-        return len(self.dataset)
-
-
-class DistributedVideoSampler(_DistributedSampler):
-    """Put videos to multi gpus during testing.
-
-    Args:
-        dataset (Dataset): Test dataset must have `data_infos` attribute.
-            Each data_info in `data_infos` records information of one frame or
-            one video (in SOT Dataset). If not SOT Dataset, each video must
-            have one data_info that includes `data_info['frame_id'] == 0`.
-        num_replicas (int): The number of gpus. Defaults to None.
-        rank (int): Gpu rank id. Defaults to None.
-        shuffle (bool): If True, shuffle the dataset. Defaults to False.
-    """
-
-    def __init__(self, dataset, num_replicas=None, rank=None, shuffle=False):
-        super().__init__(dataset, num_replicas=num_replicas, rank=rank)
-        self.shuffle = shuffle
-        assert not self.shuffle, 'Specific for video sequential testing.'
-        self.num_samples = len(dataset)
-
-        if isinstance(dataset, BaseSOTDataset):
+        if isinstance(self.dataset, BaseSOTDataset):
             # The input of '__getitem__' function in SOT dataset class must be
             # a tuple when testing. The tuple is in (video_index, frame_index)
             # format.

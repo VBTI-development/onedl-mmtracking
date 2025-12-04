@@ -144,7 +144,7 @@ def test_plt_show_wrong_tracks():
     # bboxes.shape[0] should have 5
     with pytest.raises(AssertionError):
         image = np.ones((100, 100, 3), np.uint8)
-        bboxes = np.array([[20, 10, 30, 30], [30, 40, 60, 60, 0.5]])
+        bboxes = np.array([np.array([20, 10, 30, 30]), np.array([30, 40, 60, 60, 0.5])], dtype=object)
         ids = np.array([0, 1])
         error_types = np.array([0, 1])
         out_image = vis._plt_show_wrong_tracks(

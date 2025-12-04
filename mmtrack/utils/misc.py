@@ -1,5 +1,7 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+import collections.abc as container_abcs
 from copy import deepcopy
+from itertools import repeat
 from typing import List, Optional, Sequence, Tuple, Union
 
 import numpy as np
@@ -178,3 +180,12 @@ def format_video_level_show(
         res_line.insert(0, video_name)
 
     return eval_show_results
+
+
+def ntuple(n):
+    def parse(x):
+        if isinstance(x, container_abcs.Iterable):
+            return x
+        return tuple(repeat(x, n))
+
+    return parse

@@ -2,7 +2,7 @@
 from typing import List, Optional
 
 import torch
-from mmcls.models.classifiers import ImageClassifier
+from mmpretrain.models.classifiers import ImageClassifier
 
 from mmtrack.registry import MODELS
 from mmtrack.structures import ReIDDataSample

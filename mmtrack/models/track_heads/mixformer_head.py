@@ -3,16 +3,15 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from einops import rearrange
-from mmcv.cnn.utils.weight_init import trunc_normal_
+from mmengine.model.weight_init import trunc_normal_
 from mmcv.ops.prroi_pool import PrRoIPool
-from mmcv.runner.base_module import BaseModule
-from mmdet.models import HEADS
-from mmdet.models.builder import build_head, build_loss
+from mmengine.model import BaseModule
 
 from mmtrack.models.track_heads.stark_head import ScoreHead as MLPScoreHead
+from mmtrack.registry import MODELS
 
 
-@HEADS.register_module()
+@MODELS.register_module()
 class MixFormerScoreDecoder(nn.Module):
     """Score Prediction Module (SPM) proposed in
     "MixFormer: End-to-End Tracking with Iterative
@@ -115,7 +114,7 @@ class MixFormerScoreDecoder(nn.Module):
         return out_scores
 
 
-@HEADS.register_module()
+@MODELS.register_module()
 class MixFormerHead(BaseModule):
     """MixFormer head module for bounding box regression and prediction of
     confidence of tracking bbox.
@@ -136,11 +135,11 @@ class MixFormerHead(BaseModule):
         super(MixFormerHead, self).__init__(init_cfg=init_cfg)
 
         assert bbox_head is not None
-        self.bbox_head = build_head(bbox_head)
-        self.score_decoder_head = build_head(score_head)
+        self.bbox_head = MODELS.build(bbox_head)
+        self.score_decoder_head = MODELS.build(score_head)
 
-        self.loss_iou = build_loss(loss_iou)
-        self.loss_bbox = build_loss(loss_bbox)
+        self.loss_iou = MODELS.build(loss_iou)
+        self.loss_bbox = MODELS.build(loss_bbox)
 
     def forward_bbox_head(self, search):
         """
@@ -197,7 +196,6 @@ class MixFormerHead(BaseModule):
             img_size (tuple, optional): the size (h, w) of original
                 search image. Defaults to None.
         """
-        raise NotImplementedError
         pred_bboxes = track_results['pred_bboxes']
         if torch.isnan(pred_bboxes).any():
             raise ValueError('Network outputs is Nan! Stop training')
