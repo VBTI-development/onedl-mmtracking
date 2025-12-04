@@ -114,7 +114,6 @@ Supported Datasets
 Supported Methods
 
 - [x] [SiameseRPN++](configs/sot/siamese_rpn) (CVPR 2019)
-- [x] [STARK](configs/sot/stark) (ICCV 2021)
 - [x] [MixFormer](configs/sot/mixformer) (CVPR 2022)
 - [ ] [PrDiMP](https://arxiv.org/abs/2003.12565) (CVPR2020) (WIP)
 
@@ -136,7 +135,6 @@ Supported Methods
 - [x] [Tracktor](configs/mot/tracktor) (ICCV 2019)
 - [x] [QDTrack](configs/mot/qdtrack) (CVPR 2021)
 - [x] [ByteTrack](configs/mot/bytetrack) (ECCV 2022)
-- [x] [OC-SORT](configs/mot/ocsort) (arXiv 2022)
 
 Supported Datasets
 
@@ -173,7 +171,7 @@ and develop their own new video perception methods.
 If you find this project useful in your research, please consider cite:
 
 ```latex
-@misc{mmtrack2020,
+@misc{onedl-mmtrack2025,
     title={{OneDL MMTracking: OneDL Lab} video perception toolbox and benchmark},
     author={OneDL-MMTracking Contributors},
     howpublished = {\url{https://github.com/vbti-development/onedl-mmtracking}},

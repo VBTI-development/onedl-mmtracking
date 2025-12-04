@@ -1,3 +1,87 @@
+[project]
+name = "onedl-mmtracking"
+version = "1.1.0"
+description = "OneDL Unified Video Perception Platform"
+readme = "README.md"
+authors = [
+    {name = "OneDL MMTracking Contributors"},
+    {name = "VBTI Open Source Team", email = "oss-team@vbti.nl"}
+]
+license = "LicenseRef-Apache-2.0"
+requires-python = ">=3.10"
+keywords = ["computer vision", "object tracking", "video object detection"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "attributee",
+    "lap",
+    "matplotlib",
+    "motmetrics",
+    "pycocotools",
+    "scikit-learn",
+    "scipy",
+    "seaborn",
+    "tabulate",
+    "tqdm",
+    "trackeval",
+]
+
+[project.urls]
+Homepage = "https://github.com/VBTI-development/onedl-mmtracking"
+Repository = "https://github.com/VBTI-development/onedl-mmtracking"
+Documentation = "https://onedl-mmtracking.readthedocs.io/en/latest/"
+
+[dependency-groups]
+build = [
+    "cython",
+    "numpy"
+]
+docs = [
+    "myst-parser",
+    "pytorch_sphinx_theme @ git+https://github.com/VBTI-development/onedl_sphinx_theme.git",
+    "sphinx",
+    "sphinx-copybutton",
+    "sphinx_markdown_tables",
+]
+readthedocs = [
+    "onedl-mmcv",
+    "onedl-mmengine",
+    "onedl-mmdetection",
+    "torch",
+    "torchvision"
+]
+tests = [
+    "asynctest",
+    "codecov",
+    "parameterized",
+    "pytest",
+    "xdoctest>=0.10.0",
+    "vot-toolkit @ git+https://github.com/votchallenge/toolkit.git",
+]
+
+[project.optional-dependencies]
+torch = [ "torch", "torchvision" ]
+mminstall = [
+    "onedl-mmpretrain",
+    "onedl-mmcv",
+    "onedl-mmdetection[optional]",
+    "onedl-mmengine",
+]
+
+[tool.setuptools.packages.find]
+include = [ "mmtrack", "mmtrack.*" ]
+exclude = ["configs", "tools", "demo"]
+namespaces = false
+
+[build-system]
+requires = ["setuptools>=45"]
+build-backend = "setuptools.build_meta"
 
 [tool.isort]
 line_length = 79
